@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<style>
+		input.form-control:focus {
+			color: white;
+			/* Text color when focused */
+		}
+
+		.progress {
+			height: 20px;
+			margin-bottom: 20px;
+		}
+
+		.progress-bar {
+			background-color: green;
+			/* Set your desired color here */
+			width: 0;
+			height: 100%;
+		}
+	</style>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Corona Admin</title>
+	<!-- plugins:css -->
+	<link rel="stylesheet" href="/DashboardC/assets/vendors/mdi/css/materialdesignicons.min.css">
+	<link rel="stylesheet" href="/DashboardC/assets/vendors/css/vendor.bundle.base.css">
+	<!-- endinject -->
+	<!-- Plugin css for this page -->
+	<!-- End Plugin css for this page -->
+	<!-- inject:css -->
+	<!-- endinject -->
+	<!-- Layout styles -->
+	<link rel="stylesheet" href="/DashboardC/assets/css/style.css">
+	<!-- End layout styles -->
+	<link rel="shortcut icon" href="/DashboardC/assets/images/favicon.png" />
+</head>
+
+<body>
+	<div class="container-scroller">
+		<!-- partial:/DashboardC/partials/_sidebar.html -->
+		<nav class="sidebar sidebar-offcanvas" id="sidebar">
+
+			<!-- Corona logo-->
+			<div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+				<a class="sidebar-brand brand-logo" href="/dashboard"><img src="../../DashboardC/assets/images/logo.png"
+						alt="logo" /></a>
+				<a class="sidebar-brand brand-logo-mini" href="/dashboard"><img
+						src="../../DashboardC/assets/images/logo.png" alt="logo" /></a>
+			</div>
+
+			<ul class="nav">
+				<li class="nav-item profile">
+					<div class="profile-desc">
+						<div class="profile-pic">
+							<div class="count-indicator">
+								<img class="img-xs rounded-circle " src="DashboardC/assets/images/faces/face15.jpg"
+									alt="">
+								<span class="count bg-success"></span>
+							</div>
+							<div class="profile-name">
+								<h5 class="mb-0 font-weight-normal" th:text="${session.otpVerifiedUser}"></h5>
+								<span th:text="${session.otpVerifiedUserRole}"></span>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item nav-category"
+					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Employee'}">
+					<span class="nav-link">Payroll System</span>
+				</li>
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'}">
+					<a class="nav-link" href="/allowances">
+						<span class="menu-icon">
+							<i class="mdi mdi-speedometer"></i>
+						</span>
+						<span class="menu-title">Allowance</span>
+					</a>
+				</li>
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'}">
+					<a class="nav-link" href="/deductions">
+						<span class="menu-icon">
+							<i class="mdi mdi-playlist-play"></i>
+						</span>
+						<span class="menu-title">Deduction</span>
+					</a>
+				</li>
+				<li class="nav-item menu-items"
+					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR'}">
+					<a class="nav-link" href="/employees">
+						<span class="menu-icon">
+							<i class="mdi mdi-table-large"></i>
+						</span>
+						<span class="menu-title">Employee</span>
+					</a>
+				</li>
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'}">
+					<a class="nav-link" href="/designations">
+						<span class="menu-icon">
+							<i class="mdi mdi-chart-bar"></i>
+						</span>
+						<span class="menu-title">Designation</span>
+					</a>
+				</li>
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'}">
+					<a class="nav-link" href="/departments">
+						<span class="menu-icon">
+							<i class="mdi mdi-contacts"></i>
+						</span>
+						<span class="menu-title">Department</span>
+					</a>
+				</li>
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'}">
+					<a class="nav-link" href="/banks">
+						<span class="menu-icon">
+							<i class="mdi mdi-contacts"></i>
+						</span>
+						<span class="menu-title">Bank</span>
+					</a>
+				</li>
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'}">
+					<a class="nav-link" href="/availableUsers">
+						<span class="menu-icon">
+							<i class="mdi mdi-chart-bar"></i>
+						</span>
+						<span class="menu-title">Users</span>
+					</a>
+				</li>
+				<li class="nav-item menu-items"
+					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='Employee' }">
+					<a class="nav-link" href="../../pages/icons/mdi.html">
+						<span class="menu-icon">
+							<i class="mdi mdi-contacts"></i>
+						</span>
+						<span class="menu-title">Salary Slips</span>
+					</a>
+				</li>
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='HR'}">
+					<a class="nav-link" href="../../pages/icons/mdi.html">
+						<span class="menu-icon">
+							<i class="mdi mdi-contacts"></i>
+						</span>
+						<span class="menu-title">Assign Allowance</span>
+					</a>
+				</li>
+				<li class="nav-item nav-category"
+					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='Employee'}">
+					<span class="nav-link">Attendance System</span>
+				</li>
+				<li class="nav-item menu-items"
+					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR'}">
+					<a class="nav-link" href="/holidays">
+						<span class="menu-icon">
+							<i class="mdi mdi-table-large"></i>
+						</span>
+						<span class="menu-title">Holidays</span>
+					</a>
+				</li>
+				<li class="nav-item menu-items"
+					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='Manager'|| session.otpVerifiedUserRole =='Employee'}">
+					<a class="nav-link"
+						th:href="${session.otpVerifiedUserRole == 'Employee' ? '/leaves/new' : '/leaves'}">
+						<span class="menu-icon">
+							<i class="mdi mdi-table-large"></i>
+						</span>
+						<span class="menu-title">Leaves</span>
+					</a>
+				</li>
+				<li class="nav-item menu-items"
+					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR'}">
+					<a class="nav-link" href="/workdays">
+						<span class="menu-icon">
+							<i class="mdi mdi-table-large"></i>
+						</span>
+						<span class="menu-title">WorkDays</span>
+					</a>
+				</li>
+				<li class="nav-item menu-items"
+					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='Employee'}">
+					<a class="nav-link" href="../../pages/tables/basic-table.html">
+						<span class="menu-icon">
+							<i class="mdi mdi-table-large"></i>
+						</span>
+						<span class="menu-title">Attendance Report</span>
+					</a>
+				</li>
+				<li class="nav-item nav-category"
+					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR'}">
+					<span class="nav-link">Human Resource Management</span>
+				</li>
+				<li class="nav-item menu-items"
+					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR'}">
+					<a class="nav-link" href="../../pages/tables/basic-table.html">
+						<span class="menu-icon">
+							<i class="mdi mdi-table-large"></i>
+						</span>
+						<span class="menu-title">Open Projects</span>
+					</a>
+				</li>
+				<li class="nav-item menu-items"
+					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR'}">
+					<a class="nav-link" href="../../pages/tables/basic-table.html">
+						<span class="menu-icon">
+							<i class="mdi mdi-table-large"></i>
+						</span>
+						<span class="menu-title">Demand</span>
+					</a>
+				</li>
+				<li class="nav-item menu-items"
+					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Employee'}">
+					<a class="nav-link" href="../../pages/tables/basic-table.html">
+						<span class="menu-icon">
+							<i class="mdi mdi-table-large"></i>
+						</span>
+						<span class="menu-title">Interviews</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<!-- partial -->
+		<div class="container-fluid page-body-wrapper">
+			<!-- partial:/DashboardC/partials/_navbar.html -->
+			<nav class="navbar p-0 fixed-top d-flex flex-row">
+				<div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+					<a class="navbar-brand brand-logo-mini" href="/DashboardC/index.html"><img
+							src="/DashboardC/assets/images/logo-mini.svg" alt="logo" /></a>
+				</div>
+				<div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+					<button class="navbar-toggler navbar-toggler align-self-center" type="button"
+						data-toggle="minimize">
+						<span class="mdi mdi-menu"></span>
+					</button>
+
+
+
+					<ul class="navbar-nav w-100"> <!--mobile view space-->
+
+					</ul>
+
+
+
+
+					<ul class="navbar-nav navbar-nav-right">
+						<li class="nav-item dropdown d-none d-lg-block">
+							<a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown"
+								data-toggle="dropdown" aria-expanded="false" href="#">+ Create New Project</a>
+						</li>
+
+
+
+
+
+						<li class="nav-item dropdown">
+							<a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+								<div class="navbar-profile">
+									<img class="img-xs rounded-circle" src="/DashboardC/assets/images/faces/face15.jpg"
+										alt="">
+									<p class="mb-0 d-none d-sm-block navbar-profile-name"
+										th:text="${session.otpVerifiedUser}"></p>
+									<i class="mdi mdi-menu-down d-none d-sm-block"></i>
+								</div>
+							</a>
+
+							<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+								aria-labelledby="profileDropdown">
+								<h6 class="p-3 mb-0">Profile</h6>
+								<div class="dropdown-divider"></div>
+
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item preview-item">
+									<div class="preview-thumbnail">
+										<div class="preview-icon bg-dark rounded-circle">
+											<i class="mdi mdi-logout text-danger"></i>
+										</div>
+									</div>
+									<div class="preview-item-content">
+										<p class="preview-subject mb-1">Log out</p>
+									</div>
+								</a>
+
+						</li>
+					</ul>
+					<button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+						data-toggle="offcanvas">
+						<span class="mdi mdi-format-line-spacing"></span>
+					</button>
+				</div>
+			</nav>
+
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="page-header">
+						<h3 class="page-title"> Add Employee </h3>
+						<div id="pageCounts">
+							<h3>
+								<p>Page <span id="currentPage">1</span> of <span id="totalPages">2</span></p>
+							</h3>
+						</div>
+					</div>
+
+					<div class="progress">
+						<div class="progress-bar" id="progressBar" role="progressbar"></div>
+					</div>
+					<div class="row">
+						<div class="col-12 grid-margin">
+							<div class="card">
+								<div class="card-body">
+									<form class="form-sample" th:action="@{/employee}" th:object="${employee}"
+										method="POST" enctype="multipart/form-data">
+
+
+										<div id="page1">
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Employee Name</label>
+														<div class="col-sm-9">
+															<input type="text" name="empName" id="empName"
+																class="form-control" th:field="*{empName}" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Employee Address</label>
+														<div class="col-sm-9">
+															<input type="text" name="currentAddress" id="currentAddress"
+																class="form-control" th:field="*{currentAddress}"
+																placeholder="Current Address" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Employee Address</label>
+														<div class="col-sm-9">
+															<input type="text" name="permanentAddress"
+																id="permanentAddress" class="form-control"
+																th:field="*{permanentAddress}"
+																placeholder="Permenant Address" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Date of Birth</label>
+														<div class="col-sm-9">
+															<input type="date" class="form-control"
+																placeholder="dd/mm/yyyy" th:field="*{dateOfBirth}" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Gender</label>
+														<div class="col-sm-4">
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="gender" id="gender" value="Male" checked
+																		th:field="*{gender}"> Male </label>
+															</div>
+														</div>
+														<div class="col-sm-5">
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="gender" id="gender" value="Female"
+																		th:field="*{gender}"> Female </label>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Employee
+															Email</label>
+														<div class="col-sm-9">
+															<input type="email" name="employeeEmail" id="employeeEmail"
+																class="form-control" th:field="*{employeeEmail}"
+																placeholder="abc@gmail.com" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Employee
+															Contact No</label>
+														<div class="col-sm-9">
+															<input type="text" name="employeeContactNo"
+																id="employeeContactNo" class="form-control"
+																th:field="*{employeeContactNo}" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">
+															Maritial Status</label>
+														<div class="col-sm-9">
+															<select class="form-control" style="color: white;"
+																th:field="*{maritalStatus}">
+																<option value="Married">Married</option>
+																<option value="Unmarried">Unmarried</option>
+															</select>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">
+															State</label>
+														<div class="col-sm-9">
+															<select class="form-control" style="color: white;"
+																th:field="*{state}">
+																<option value="Maharashtra">Maharashtra</option>
+																<option value="Gujrat">Gujrat</option>
+															</select>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Employee Pan</label>
+														<div class="col-sm-9">
+															<input type="text" name="employeePan" id="employeePan"
+																class="form-control" th:field="*{employeePan}" />
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</div>
+
+										<div id="page2" style="display: none;">
+											<div class="row">
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Select
+															Department</label>
+														<div class="col-sm-9">
+															<select class="form-control" style="color: white;"
+																th:field="*{department.departmentId}">
+																<option value="0" disabled selected>Select
+																</option>
+																<option th:each="departmentz : ${allDepartments}"
+																	th:value="${departmentz.departmentId}"
+																	th:text="${departmentz.departmentName}">
+																</option>
+															</select>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Select
+															Designation</label>
+														<div class="col-sm-9">
+															<select class="form-control" style="color: white;"
+																th:field="*{designation.designationId}">
+																<option value="0" disabled selected>Select
+																</option>
+																<option th:each="designationz : ${allDesignations}"
+																	th:value="${designationz.designationId}"
+																	th:text="${designationz.designationName}">
+																</option>
+															</select>
+														</div>
+													</div>
+												</div>
+
+
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Date of Joining</label>
+														<div class="col-sm-9">
+															<input type="date" class="form-control"
+																placeholder="dd/mm/yyyy" th:field="*{dateOfJoining}" />
+														</div>
+													</div>
+												</div>
+
+												<!--<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Select
+															Manager</label>
+														<div class="col-sm-9">
+															<select class="form-control" style="color: white;"
+																th:field="*{empDepartment.departmentId}">
+																<option value="0" disabled selected>Select
+																</option>
+																<option th:each="department : ${departments}"
+																	th:value="${department.departmentId}"
+																	th:text="${department.departmentName}">
+																</option>
+															</select>
+														</div>
+													</div>
+												</div> -->
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">
+															Employement Type</label>
+														<div class="col-sm-9">
+															<select class="form-control" style="color: white;"
+																th:field="*{employmentType}">
+																<option value="Full-time">Full-time</option>
+																<option value="Part-time">Part-time</option>
+																<option value="Contract">Contract</option>
+															</select>
+														</div>
+													</div>
+												</div>
+
+
+
+
+
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Select
+															Bank</label>
+														<div class="col-sm-9">
+															<select class="form-control" style="color: white;"
+																th:field="*{bank.bankId}">
+																<option value="0" disabled selected>Select
+																</option>
+																<option th:each="banksz : ${allbanks}"
+																	th:value="${banksz.bankId}"
+																	th:text="${banksz.bankName}">
+																</option>
+															</select>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Bank Account
+															Number</label>
+														<div class="col-sm-9">
+															<input type="text" name="bankAccountNumber"
+																id="bankAccountNumber" class="form-control"
+																th:field="*{bankAccountNumber}" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Bank IFSC
+														</label>
+														<div class="col-sm-9">
+															<input type="text" name="bankIFSC" id="bankIFSC"
+																class="form-control" th:field="*{bankIFSC}" />
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</div>
+
+										<div id="page3" style="display: none;">
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">
+															Highest Eduction</label>
+														<div class="col-sm-9">
+															<select class="form-control" style="color: white;"
+																th:field="*{highestEducation}">
+																<option value="">Select</option>
+																<option value="High School">High School</option>
+																<option value="Associate Degree">Associate Degree
+																</option>
+																<option value="Bachelor's Degree">Bachelor's Degree
+																</option>
+																<option value="Master's Degree">Master's Degree</option>
+																<option value="doctorate">Doctorate</option>
+															</select>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">College/University Name
+														</label>
+														<div class="col-sm-9">
+															<input type="text" name="collegeUniversityName"
+																id="collegeUniversityName" class="form-control"
+																th:field="*{collegeUniversityName}" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Area Of Study
+														</label>
+														<div class="col-sm-9">
+															<input type="text" name="areaOfStudy" id="areaOfStudy"
+																class="form-control" th:field="*{areaOfStudy}" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Date of
+															Graduation</label>
+														<div class="col-sm-9">
+															<input type="date" class="form-control"
+																placeholder="dd/mm/yyyy"
+																th:field="*{dateOfGraduation}" />
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div id="page4" style="display: none;">
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Name Of Emergency Contact
+														</label>
+														<div class="col-sm-9">
+															<input type="text" name="emergencyContactName"
+																id="emergencyContactName" class="form-control"
+																th:field="*{emergencyContactName}" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">
+															Relation</label>
+														<div class="col-sm-9">
+															<select class="form-control" style="color: white;"
+																th:field="*{emergencyContactRelation}">
+																<option value="">Select</option>
+																<option value="Mother">Mother</option>
+																<option value="Father">Father
+																</option>
+																<option value="Sister">Sister
+																</option>
+																<option value="Brother">Brother</option>
+															</select>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Address
+														</label>
+														<div class="col-sm-9">
+															<input type="text" name="emergencyContactAddress"
+																id="emergencyContactAddress" class="form-control"
+																th:field="*{emergencyContactAddress}" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Contact
+														</label>
+														<div class="col-sm-9">
+															<input type="text" name="emergencyContactContact"
+																id="emergencyContactContact" class="form-control"
+																th:field="*{emergencyContactContact}" />
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+
+
+										<div id="page5" style="display: none;">
+											<div class="row">
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-3 col-form-label">Select
+															Reference</label>
+														<div class="col-sm-9">
+															<select class="form-control" style="color: white;"
+																th:field="*{reference}">
+																<option value="0" disabled selected>Select
+																</option>
+																<option value="None" selected>None
+																</option>
+																<option th:each="employeesz : ${allEmployees}"
+																	th:value="${employeesz.empName}"
+																	th:text="${employeesz.empName}">
+																</option>
+															</select>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label>Upload Resume (Max 3MB)</label>
+												<input type="file" name="resumeFile" class="file-upload-default"
+													accept=".pdf" onchange="validateResumeSize(this)">
+												<div class="input-group col-xs-12">
+													<input type="text" class="form-control file-upload-info" disabled=""
+														placeholder="Upload Resume">
+													<span class="input-group-append">
+														<button class="file-upload-browse btn btn-primary"
+															type="button">Upload</button>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label>Upload Profile Photo (Max 1MB)</label>
+												<input type="file" name="profilePhoto" class="file-upload-default"
+													accept="image/*" onchange="validateProfilePhotoSize(this)">
+												<div class="input-group col-xs-12">
+													<input type="text" class="form-control file-upload-info" disabled=""
+														placeholder="Upload Image">
+													<span class="input-group-append">
+														<button class="file-upload-browse btn btn-primary"
+															type="button">Upload</button>
+													</span>
+												</div>
+											</div>
+
+											<script>
+												function validateResumeSize(input) {
+													if (input.files[0]) {
+														const fileSize = input.files[0].size; // Size in bytes
+														const maxSize = 3 * 1024 * 1024; // 5MB in bytes
+
+														if (fileSize > maxSize) {
+															alert("Resume file size exceeds 5MB limit. Please choose a smaller file.");
+															input.value = ''; // Clear the input field
+														}
+													}
+												}
+
+												function validateProfilePhotoSize(input) {
+													if (input.files[0]) {
+														const fileSize = input.files[0].size; // Size in bytes
+														const maxSize = 1 * 1024 * 1024; // 1MB in bytes
+
+														if (fileSize > maxSize) {
+															alert("Profile photo size exceeds 1MB limit. Please choose a smaller file.");
+															input.value = ''; // Clear the input field
+														}
+													}
+												}
+											</script>
+
+											<!--<div class="form-group row">
+												<label class="col-sm-6 col-form-label">Employment Eligibility
+													Verification</label>
+												<div class="col-sm-6">
+													<div class="form-check form-check-success">
+														<label class="form-check-label">
+															<input type="radio" class="form-check-input"
+																th:field="*{employmentEligibilityVerification}"
+																th:value="true">Pass
+															<i class="input-helper"></i>
+														</label>
+													</div>
+													<div class="form-check form-check-danger">
+														<label class="form-check-label">
+															<input type="radio" class="form-check-input"
+																th:field="*{employmentEligibilityVerification}"
+																th:value="false">Fail
+															<i class="input-helper"></i>
+														</label>
+													</div>
+												</div>
+											</div>-->
+
+											<!-- Similar changes for other fields -->
+
+
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-6 col-form-label">Employment Eligibility
+															Verification</label>
+														<div class="col-sm-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="employmentEligibility"
+																		id="eligibilityPass" value="Pass" checked
+																		th:field="*{employmentEligibilityVerification}">
+																	Pass <i class="input-helper"></i>
+																</label>
+															</div>
+															<div class="form-check form-check-danger">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="employmentEligibility"
+																		id="eligibilityFail" value="Fail"
+																		th:field="*{employmentEligibilityVerification}">
+																	Fail <i class="input-helper"></i>
+																</label>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-6 col-form-label">Non-Disclosure Agreement
+															(NDA) Consent</label>
+														<div class="col-sm-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="ndaConsent" id="ndaPass" value="Pass"
+																		checked th:field="*{ndaConsent}">
+																	Pass <i class="input-helper"></i>
+																</label>
+															</div>
+															<div class="form-check form-check-danger">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="ndaConsent" id="ndaFail" value="Fail"
+																		th:field="*{ndaConsent}">
+																	Fail
+																</label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-6 col-form-label">Criminal Background Check
+															Consent</label>
+														<div class="col-sm-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="criminalConsent" id="criminalPass"
+																		value="Pass" checked
+																		th:field="*{criminalBackgroundCheckConsent}">
+																	Pass <i class="input-helper"></i>
+																</label>
+															</div>
+															<div class="form-check form-check-danger">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="criminalConsent" id="criminalFail"
+																		value="Fail"
+																		th:field="*{criminalBackgroundCheckConsent}">
+																	Fail <i class="input-helper"></i>
+																</label>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-6 col-form-label">Drug Testing Consent (if
+															applicable)</label>
+														<div class="col-sm-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="drugTestingConsent" id="drugPass"
+																		value="Pass" checked
+																		th:field="*{drugTestingConsent}">
+																	Pass <i class="input-helper"></i>
+																</label>
+															</div>
+															<div class="form-check form-check-danger">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="drugTestingConsent" id="drugFail"
+																		value="Fail" th:field="*{drugTestingConsent}">
+																	Fail <i class="input-helper"></i>
+																</label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+
+
+
+
+
+
+										<br>
+
+										<div id="submitButtonWrapper">
+											<div class="row">
+												<div class="col-md-6 text-center">
+													<button type="button" id="prevButton" onclick="prevPage()"
+														class="btn btn-success btn-rounded btn-fw">Previous</button>
+													<button type="button" class="btn btn-primary btn-rounded btn-fw"
+														id="backButton"
+														onclick="window.location.href='/employees'">Back</button>
+													<input type="submit" class="btn btn-success btn-rounded btn-fw"
+														id="submitButton">
+												</div>
+											</div>
+										</div>
+
+
+										<center>
+											<div id="otherButtons">
+												<div class="row">
+													<div class="col-md-6 text-right">
+														<button type="button" id="prevButton1" onclick="prevPage()"
+															class="btn btn-success btn-rounded btn-fw">Previous</button>
+														<button type="button" class="btn btn-primary btn-rounded btn-fw"
+															id="backButton"
+															onclick="window.location.href='/employees'">Back</button>
+
+													</div>
+													<div class="col-md-6 text-right">
+														<button type="button" id="nextButton" onclick="nextPage()"
+															class="btn btn-primary btn-rounded btn-fw">Next</button>
+
+													</div>
+
+												</div>
+											</div>
+										</center>
+
+
+									</form>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- page-body-wrapper ends -->
+		</div>
+		<script>
+			var currentPage = 1;
+			var totalPages = 5;  // Initialize the current page
+
+			function updatePageCounts() {
+				var currentPageElement = document.getElementById("currentPage");
+				var totalPagesElement = document.getElementById("totalPages");
+
+				currentPageElement.textContent = currentPage;
+				totalPagesElement.textContent = totalPages;
+			}
+
+			function nextPage() {
+				// Hide the current page
+				document.getElementById("page" + currentPage).style.display = "none";
+
+				// Increment the page number
+				currentPage++;
+
+				// Show the next page
+				document.getElementById("page" + currentPage).style.display = "block";
+
+				updateProgressBar();
+				// Update buttons (e.g., hide "Previous" on the first page)
+				updateButtons();
+				updatePageCounts();
+			}
+
+			function prevPage() {
+				if (currentPage > 1) {
+					// Hide the current page
+					document.getElementById("page" + currentPage).style.display = "none";
+
+					// Decrement the page number
+					currentPage--;
+
+					// Show the previous page
+					document.getElementById("page" + currentPage).style.display = "block";
+
+					updateProgressBar();
+					// Update buttons (e.g., hide "Previous" on the first page)
+					updateButtons();
+					updatePageCounts();
+				}
+			}
+
+
+			function updateProgressBar() {
+				var progressBar = document.getElementById("progressBar");
+				var progress = (currentPage - 1) / (totalPages - 1) * 100; // Calculate the progress percentage
+				progressBar.style.width = progress + "%";
+			}
+
+			function updateButtons() {
+				document.getElementById("prevButton").disabled = (currentPage === 1); // Disable "Previous" on the first page
+
+				if (currentPage === totalPages) {
+					document.getElementById("nextButton").style.display = "none";
+					document.getElementById("submitButtonWrapper").style.display = "block";
+					document.getElementById("otherButtons").style.display = "none"; // Hide other buttons
+				} else {
+					document.getElementById("nextButton").style.display = "block";
+					document.getElementById("submitButtonWrapper").style.display = "none";
+					document.getElementById("otherButtons").style.display = "block"; // Show other buttons
+				}
+			}
+
+			updateProgressBar();
+			updateButtons();
+			updatePageCounts();
+		</script>
+		<!-- container-scroller -->
+		<!-- plugins:js -->
+		<script src="/DashboardC/assets/vendors/js/vendor.bundle.base.js"></script>
+		<!-- endinject -->
+		<!-- Plugin js for this page -->
+		<!-- End plugin js for this page -->
+		<!-- inject:js -->
+		<script src="/DashboardC/assets/js/off-canvas.js"></script>
+		<script src="/DashboardC/assets/js/hoverable-collapse.js"></script>
+		<script src="/DashboardC/assets/js/misc.js"></script>
+		<script src="/DashboardC/assets/js/settings.js"></script>
+		<script src="/DashboardC/assets/js/todolist.js"></script>
+
+		<script src="/DashboardC/assets/js/file-upload.js"></script>
+		<!-- endinject -->
+		<!-- Custom js for this page -->
+		<!-- End custom js for this page -->
+</body>
+
+</html>

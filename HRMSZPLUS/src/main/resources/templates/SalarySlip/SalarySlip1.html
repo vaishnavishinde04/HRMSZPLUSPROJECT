@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<style>
+		input.form-control:focus {
+			color: white;
+			/* Text color when focused */
+		}
+	</style>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Corona Admin</title>
+	<!-- plugins:css -->
+	<link rel="stylesheet" href="/DashboardC/assets/vendors/mdi/css/materialdesignicons.min.css">
+	<link rel="stylesheet" href="/DashboardC/assets/vendors/css/vendor.bundle.base.css">
+	<!-- endinject -->
+	<!-- Plugin css for this page -->
+	<!-- End Plugin css for this page -->
+	<!-- inject:css -->
+	<!-- endinject -->
+	<!-- Layout styles -->
+	<link rel="stylesheet" href="/DashboardC/assets/css/style.css">
+	<!-- End layout styles -->
+	<link rel="shortcut icon" href="/DashboardC/assets/images/favicon.png" />
+</head>
+
+<body>
+	<div class="container-scroller">
+		<!-- partial:/DashboardC/partials/_sidebar.html -->
+		<nav class="sidebar sidebar-offcanvas" id="sidebar">
+
+			<!-- Corona logo-->
+			<div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+				<a class="sidebar-brand brand-logo" href="/dashboard"><img src="../../DashboardC/assets/images/logo.png"
+						alt="logo" /></a>
+				<a class="sidebar-brand brand-logo-mini" href="/dashboard"><img
+						src="../../DashboardC/assets/images/logo.png" alt="logo" /></a>
+			</div>
+
+			
+
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="page-header">
+						<h3 class="page-title"> Genrate SalarySlip </h3>
+					</div>
+					<div class="row">
+						<div class="col-12 grid-margin">
+							<div class="card">
+								<div class="card-body">
+									<form class="form-sample" th:action="@{/generate/{empId}}" method="get"
+										id="employeeForm">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Employee ID</label>
+													<div class="col-sm-9">
+														<input type="text" name="EmployeeId" id="EmployeeId"
+															class="form-control" />
+													</div>
+												</div>
+											</div>
+										</div>
+										<br>
+										<center>
+											<!-- Use JavaScript to update the form action and submit the form -->
+											<input type="button" class="btn btn-success btn-rounded btn-fw"
+												value="Submit"  onclick="submitForm()">
+										</center>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- partial -->
+			</div>
+			<!-- page-body-wrapper ends -->
+		</div>
+
+		<script>
+			function submitForm() {
+				// Get the entered employee ID from the input field
+				var employeeId = document.getElementById("EmployeeId").value;
+
+				// Update the form action with the employee ID
+				document.getElementById("employeeForm").action = "/generate/" + employeeId;
+
+				// Submit the form with the updated action
+				document.getElementById("employeeForm").submit();
+			}
+		</script>
+		<!-- container-scroller -->
+		<!-- plugins:js -->
+		<script src="/DashboardC/assets/vendors/js/vendor.bundle.base.js"></script>
+		<!-- endinject -->
+		<!-- Plugin js for this page -->
+		<!-- End plugin js for this page -->
+		<!-- inject:js -->
+		<script src="/DashboardC/assets/js/off-canvas.js"></script>
+		<script src="/DashboardC/assets/js/hoverable-collapse.js"></script>
+		<script src="/DashboardC/assets/js/misc.js"></script>
+		<script src="/DashboardC/assets/js/settings.js"></script>
+		<script src="/DashboardC/assets/js/todolist.js"></script>
+		<!-- endinject -->
+		<!-- Custom js for this page -->
+		<!-- End custom js for this page -->
+</body>
+
+</html>
